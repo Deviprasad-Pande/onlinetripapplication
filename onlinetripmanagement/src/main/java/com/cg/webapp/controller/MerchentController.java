@@ -1,17 +1,25 @@
 package com.cg.webapp.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.webapp.beans.LoginBean;
 import com.cg.webapp.beans.Merchant;
+import com.cg.webapp.beans.Package;
 import com.cg.webapp.exception.MerchantNotFoundException;
+import com.cg.webapp.exception.PackageNotFoundException;
 import com.cg.webapp.service.MerchantService;
 import com.cg.webapp.service.PackageService;
 
@@ -37,8 +45,6 @@ public class MerchentController {
 	
 	
 	
-	
-	
 	@PostMapping("/loginMerchant")
 	public ResponseEntity<Merchant> loginMerchantHandler(@RequestBody LoginBean loginBean){
 		
@@ -55,6 +61,30 @@ public class MerchentController {
 		
 		
 		
+	}
+
+	@GetMapping("/viewMerchantByUsername/{email}")
+    public ResponseEntity<Merchant>  viewMerchantByUsername(@PathVariable String email)throws MerchantNotFoundException{
+		Merchant viewMerchant =mService. viewMerchantByUsername(email);
+	 return new ResponseEntity<Merchant>(viewMerchant,HttpStatus.OK);
+	
+	}
+
+	
+	@PutMapping("/updateMerchant") 
+ 	public ResponseEntity<Merchant> updateMerchant(@RequestBody Merchant merchant)throws MerchantNotFoundException {
+ 		return new ResponseEntity<Merchant>(mService.updateMerchant(merchant), HttpStatus.OK);
+	}
+
+	@GetMapping("/getRegisteredMerchant/{merchantId}")
+	public List<Merchant> getAllRegisteredMerchant() throws PackageNotFoundException {
+		return mService.getAllRegisteredMerchant();
+	}
+	
+	@DeleteMapping("/deleteMerchant/{merchantId}")
+	public ResponseEntity<Merchant> deleteAMerchant(@PathVariable Integer merchantId)throws MerchantNotFoundException {
+ 		return new ResponseEntity<Merchant>(mService.deleteAMerchant(merchantId), HttpStatus.OK);
+	
 	}
 	
 	

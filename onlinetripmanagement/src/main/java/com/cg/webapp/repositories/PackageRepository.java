@@ -6,4 +6,6 @@ import com.cg.webapp.beans.Package;
 
 public interface PackageRepository extends JpaRepository<Package, Integer>{
 
+	
+
 }

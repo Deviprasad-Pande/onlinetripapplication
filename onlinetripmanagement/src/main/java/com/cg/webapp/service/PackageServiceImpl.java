@@ -33,10 +33,10 @@ public class PackageServiceImpl implements PackageService {
 
 	@Override
 	public Package getPackageDetailsById(Integer packageId) throws PackageNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		return pRepo.findById(packageId)
+				.orElseThrow(() -> new PackageNotFoundException("No cusotmer with id: " + packageId + " found!!"));
 	}
-
+	
 	@Override
 	public List<Package> getAllPackagesCreatedyMerchant(Integer merchantId) throws MerchantNotFoundException {
 		
@@ -81,7 +81,7 @@ public class PackageServiceImpl implements PackageService {
 	@Override
 	public Package updatePackage(Package tripPackage) {
 		// TODO Auto-generated method stub
-		return null;
+		return pRepo.save(tripPackage);
 	}
 
 	
