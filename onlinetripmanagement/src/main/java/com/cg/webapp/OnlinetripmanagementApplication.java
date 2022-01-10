@@ -10,6 +10,7 @@ public class OnlinetripmanagementApplication {
 		SpringApplication.run(OnlinetripmanagementApplication.class, args);
 		
 		System.out.println("hii");
+		System.out.println("hrllo");
 	}
 
 }
