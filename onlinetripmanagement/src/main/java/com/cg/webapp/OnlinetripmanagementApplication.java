@@ -8,7 +8,6 @@ public class OnlinetripmanagementApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OnlinetripmanagementApplication.class, args);
-		
 		System.out.println("hii");
 		System.out.println("hrllo");
 		System.out.println("aruna");
