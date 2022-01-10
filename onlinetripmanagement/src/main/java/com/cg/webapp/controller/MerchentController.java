@@ -1,5 +1,7 @@
 package com.cg.webapp.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +26,7 @@ public class MerchentController {
 	
 	
 	@PostMapping("/registerMerchant")
-	public ResponseEntity<Merchant> registerMerchantHandler(@RequestBody Merchant merchant){
+	public ResponseEntity<Merchant> registerMerchantHandler(@Valid @RequestBody Merchant merchant){
 		
 	 	Merchant savedMerchant= mService.registerNewMerchant(merchant);
 		
