@@ -25,6 +25,9 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer registerNewCustomer(Customer customer) {
 	
 	 return cRepo.save(customer);
+	
+	
+	
 	}
 
 	@Override
