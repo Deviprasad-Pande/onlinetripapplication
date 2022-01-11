@@ -1,31 +1,30 @@
 package com.cg.webapp.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.webapp.beans.Customer;
+import com.cg.webapp.beans.IPackage;
 import com.cg.webapp.exception.CustomerNotFoundException;
 import com.cg.webapp.exception.PackageNotAvailableException;
-import com.cg.webapp.exception.PackageNotFoundException;
 import com.cg.webapp.repositories.CustomerRepository;
-import com.cg.webapp.repositories.MerchantRepository;
-import com.cg.webapp.repositories.PackageRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
 
 @Service
+@Slf4j
 public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	private CustomerRepository cRepo;
 	
-	@Autowired
-	private PackageRepository pRepo;
-	
-
 	@Override
 	public Customer registerNewCustomer(Customer customer) {
-		
+		log.info("Registered New Customer");
 	 return cRepo.save(customer);
 	
 	
@@ -39,6 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
 		{
 			throw new CustomerNotFoundException("Invalid username or password");
 		}else
+			
 			return customer;
 		
 	}
@@ -52,28 +52,37 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer updateCustomer(Customer customer) throws CustomerNotFoundException {
-            cRepo.findById(customer.getCustomerId()).orElseThrow(() -> new CustomerNotFoundException("No cusotmer with id: " + customer.getCustomerId() + " found!!"));
-            return cRepo.save(customer);
+         cRepo.findById(customer.getCustomerId()).orElseThrow(() -> new CustomerNotFoundException("No cusotmer with id: " + customer+ " found!!"));	
+		   cRepo.save(customer);
+		   log.info("Updated the Customer");
+		return customer;
 	}
 
 	@Override
 	public List<Customer> getAllRegistedCustomers() {
-		
-		
+		log.info("All Registered Customers");
 		return cRepo.findAll();
 	}
 
 	@Override
-	public List<Package> getAllPackagesByCustomer(Integer customerId) throws CustomerNotFoundException {
-		// TODO Auto-generated method stub
-		pRepo.findById(customerId).orElseThrow(() -> new CustomerNotFoundException("No cusotmer with id: " + customerId() + " found!!"));
-       return Package;
+	public List<IPackage> getAllPackagesByCustomer(Integer customerId) throws CustomerNotFoundException {
+		Optional<Customer> opt= cRepo.findById(customerId);
+		if (opt.isPresent()) {
+		Customer customer=opt.get();
+		return customer.getPackages();
+		
+		}
+		else {
+			throw new CustomerNotFoundException("Customer not found");
+		}
+		
 	}
 
 	@Override
-	public Customer bookAPackage(Package tripPackage) throws PackageNotAvailableException {
+	public Customer bookAPackage(IPackage tripPackage) throws PackageNotAvailableException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
 }

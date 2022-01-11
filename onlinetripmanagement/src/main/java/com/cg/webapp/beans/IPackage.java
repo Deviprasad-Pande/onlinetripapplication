@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Package {
+public class IPackage {
 
 	@Id
 	@GeneratedValue(strategy =  GenerationType.AUTO)
@@ -46,21 +46,10 @@ public class Package {
 	private List<Customer> customer=new ArrayList<Customer>();
 
 
-	public void setMerchant(Merchant merchant2) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
-	public Object getNumberOfPackages() {
-		// TODO Auto-generated method stub
-		return getNumberOfPackages();
-	}
-
-
-	public void setAvailability(Object numberOfPackages2) {
-		// TODO Auto-generated method stub
-		
+	
 	}
 	
 	
@@ -68,4 +57,4 @@ public class Package {
 	
 	
 	
-}
+

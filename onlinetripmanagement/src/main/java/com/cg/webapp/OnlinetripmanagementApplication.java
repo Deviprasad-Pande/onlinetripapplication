@@ -10,10 +10,15 @@ import lombok.extern.slf4j.Slf4j;
 public class OnlinetripmanagementApplication {
 
 	public static void main(String[] args) {
+
+	  
 		
 		log.info("Online Trip Management Application Started");
+
 		SpringApplication.run(OnlinetripmanagementApplication.class, args);
+
+
 		log.info("Online Trip Management Application Configured");
 	}
-
+	
 }
