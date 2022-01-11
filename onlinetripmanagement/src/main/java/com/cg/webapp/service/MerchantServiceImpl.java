@@ -10,7 +10,10 @@ import com.cg.webapp.beans.Merchant;
 import com.cg.webapp.exception.MerchantNotFoundException;
 import com.cg.webapp.repositories.MerchantRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class MerchantServiceImpl implements MerchantService {
 
 	
@@ -22,7 +25,10 @@ public class MerchantServiceImpl implements MerchantService {
 	@Override
 	public Merchant registerNewMerchant(Merchant merchant) {
 		
-		return mRepo.save(merchant);
+		log.info("Registered New Merchant");
+        return mRepo.save(merchant);
+	
+
 	}
 
 	@Override
@@ -32,8 +38,10 @@ public class MerchantServiceImpl implements MerchantService {
 		
 		
 		if(merchant == null)
+	
 			throw new MerchantNotFoundException("Invalid merchant email..");
 		else
+			log.info("Registered New Merchant");
 			return merchant;
 		
 		
@@ -46,7 +54,7 @@ public class MerchantServiceImpl implements MerchantService {
 		
 		
 		if(opt.isPresent()) {
-			
+			log.info(" New Merchant Added..");
 			return mRepo.save(merchant);
 		}
 		else
@@ -58,7 +66,7 @@ public class MerchantServiceImpl implements MerchantService {
 
 	@Override
 	public List<Merchant> getAllRegisteredMerchant() {
-	
+		log.info("All Registered Merchant");
 		return mRepo.findAll();
 		
 		
@@ -74,7 +82,7 @@ public class MerchantServiceImpl implements MerchantService {
 			
 			Merchant merchant= opt.get();
 			mRepo.delete(merchant);
-			
+			log.info("Merchant record deleted");
 			return merchant;
 			
 			

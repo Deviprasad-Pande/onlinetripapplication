@@ -23,7 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public Customer registerNewCustomer(Customer customer) {
-	
+		log.info("Registered New Customer");
 	 return cRepo.save(customer);
 	
 	
@@ -37,6 +37,7 @@ public class CustomerServiceImpl implements CustomerService {
 		{
 			throw new CustomerNotFoundException("Invalid username or password");
 		}else
+			
 			return customer;
 		
 	}
@@ -52,11 +53,13 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer updateCustomer(Customer customer) throws CustomerNotFoundException {
          cRepo.findBy(customer).orElseThrow(() -> new CustomerNotFoundException("No cusotmer with id: " + customer+ " found!!"));	
 		   cRepo.save(customer);
+		   log.info("Updated the Customer");
 		return customer;
 	}
 
 	@Override
 	public List<Customer> getAllRegistedCustomers() {
+		log.info("All Registered Customers");
 		return cRepo.findAll();
 	}
 

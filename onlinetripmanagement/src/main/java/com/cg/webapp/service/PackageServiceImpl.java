@@ -13,7 +13,10 @@ import com.cg.webapp.exception.PackageNotFoundException;
 import com.cg.webapp.repositories.MerchantRepository;
 import com.cg.webapp.repositories.PackageRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class PackageServiceImpl implements PackageService {
 	
 	@Autowired
@@ -25,7 +28,7 @@ public class PackageServiceImpl implements PackageService {
 
 	@Override
 	public IPackage createANewTripPackage(IPackage tripPackage) {
-		
+		log.info("Created New Trip Package");
 		return pRepo.save(tripPackage);
 		
 		
@@ -46,7 +49,7 @@ public class PackageServiceImpl implements PackageService {
 			
 			Merchant merchant= opt.get();
 			
-			
+			log.info("All packages created by merchant");
 			return merchant.getPackages();
 			
 			
@@ -74,7 +77,7 @@ public class PackageServiceImpl implements PackageService {
 
 	@Override
 	public List<IPackage> getAllPackages() {
-		
+		log.info("All packages are listed");
 		return pRepo.findAll();
 	}
 
