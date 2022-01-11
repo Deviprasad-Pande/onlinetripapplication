@@ -35,7 +35,7 @@ public class MerchentController {
 	 	Merchant savedMerchant= mService.registerNewMerchant(merchant);
 		
 	 	
-	 	return new ResponseEntity<Merchant>(merchant,HttpStatus.CREATED);
+	 	return new ResponseEntity<Merchant>(savedMerchant,HttpStatus.CREATED);
 		
 	}
 	

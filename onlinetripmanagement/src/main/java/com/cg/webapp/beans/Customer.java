@@ -31,16 +31,18 @@ public class Customer {
 	@NotNull(message="Name is Mandatory")
 	private String customerName;
 	
-	@Email  @NotNull(message="Email is Mandatory")
+	@Email(message="Enter Valid Email")
+	@NotNull(message="Email is Mandatory")
 	private String email;
 	
-	@Size(min=5,max=8) @NotNull(message="Entering Password is Mandatory")
+	@Size(min=5,max=8 ,message = "MIN 5 and MAX 8")
+	@NotNull(message="Entering Password is Mandatory")
 	private String password;
 	
-	@NotNull
+	@NotNull(message="Enter Address properly")
 	private String adddress;
 	
-	@Size(min=10,max=10) @NotNull(message="Mobile Number is Mandatory")
+	@Size(min=10,max=10,message = "Mobile no should be 10 digit") @NotNull(message="Mobile Number is Mandatory")
 	private String mobileNo;
 	
 	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "customer")

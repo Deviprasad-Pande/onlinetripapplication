@@ -33,29 +33,23 @@ public class Merchant {
 	@NotNull
 	private String address;
 	
-	@Email  @NotNull(message="Email is Mandatory")
+	@Email(message="Enter Valid Email")
+	@NotNull(message="Email is Mandatory")
 	private String email;
 	
-	@Size(min=5,max=8) @NotNull(message="Entering Password is Mandatory")
+	@Size(min=5,max=8,message = "MIN 5 and MAX 8") @NotNull(message="Entering Password is Mandatory")
 	private String password;
 	
-	@Size(min=10,max=10) @NotNull(message="Mobile Number is Mandatory")
+	@Size(min=10,max=10,message = "Mobile no should be 10 digit") @NotNull(message="Mobile Number is Mandatory")
 	private String mobileNo;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "merchant")
 	private List<IPackage> packages=new ArrayList<IPackage>();
 
-	public Integer getMerchantId() {
-		// TODO Auto-generated method stub
-		return merchantId ;
-	}
-
-	public List<IPackage> getPackages() {
-		// TODO Auto-generated method stub
-		return getPackages();
+	
 	}
 
 	
 	
 	
-}
+

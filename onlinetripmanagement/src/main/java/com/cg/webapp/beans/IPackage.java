@@ -46,21 +46,10 @@ public class IPackage {
 	private List<Customer> customer=new ArrayList<Customer>();
 
 
-	public void setMerchant(Merchant merchant2) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
-	public Object getNumberOfPackages() {
-		// TODO Auto-generated method stub
-		return getNumberOfPackages();
-	}
-
-
-	public void setAvailability(Object numberOfPackages2) {
-		// TODO Auto-generated method stub
-		
+	
 	}
 	
 	
@@ -68,4 +57,4 @@ public class IPackage {
 	
 	
 	
-}
+

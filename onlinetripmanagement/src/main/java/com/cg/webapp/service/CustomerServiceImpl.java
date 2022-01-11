@@ -1,6 +1,7 @@
 package com.cg.webapp.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer updateCustomer(Customer customer) throws CustomerNotFoundException {
-         cRepo.findBy(customer).orElseThrow(() -> new CustomerNotFoundException("No cusotmer with id: " + customer+ " found!!"));	
+         cRepo.findById(customer.getCustomerId()).orElseThrow(() -> new CustomerNotFoundException("No cusotmer with id: " + customer+ " found!!"));	
 		   cRepo.save(customer);
 		   log.info("Updated the Customer");
 		return customer;
@@ -65,11 +66,15 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<IPackage> getAllPackagesByCustomer(Integer customerId) throws CustomerNotFoundException {
-		List<IPackage> packages= cRepo.findAllById(customerId);
-		if (packages == null) {
-			throw new CustomerNotFoundException("No cusotmer with Name: " + customerId + " found!!");
+		Optional<Customer> opt= cRepo.findById(customerId);
+		if (opt.isPresent()) {
+		Customer customer=opt.get();
+		return customer.getPackages();
+		
 		}
-		return packages;
+		else {
+			throw new CustomerNotFoundException("Customer not found");
+		}
 		
 	}
 
