@@ -2,6 +2,8 @@ package com.cg.webapp.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.webapp.beans.Merchant;
-import com.cg.webapp.beans.Package;
+import com.cg.webapp.beans.IPackage;
 import com.cg.webapp.exception.MerchantNotFoundException;
 import com.cg.webapp.exception.PackageNotFoundException;
 import com.cg.webapp.service.MerchantService;
@@ -33,7 +35,7 @@ public class PackageController {
 	
 	
 	@PostMapping("/createPackage/{merchantEmail}")
-	public Package createAPackageHandler(@RequestBody Package tripPackage, @PathVariable String merchantEmail) {
+	public IPackage createAPackageHandler(@Valid @RequestBody IPackage tripPackage, @PathVariable String merchantEmail) {
 		
 		Merchant merchant= mService.viewMerchantByUsername(merchantEmail);
 		
@@ -45,30 +47,30 @@ public class PackageController {
 		 
 		 
      @GetMapping("/getpackageDetailsById/{packageId}")
-			public ResponseEntity<Package> getPackageDetailsById(@PathVariable Integer packageId) throws PackageNotFoundException {
-				Package pack = pService.getPackageDetailsById(packageId);
+			public ResponseEntity<IPackage> getPackageDetailsById(@PathVariable Integer packageId) throws PackageNotFoundException {
+				IPackage pack = pService.getPackageDetailsById(packageId);
 				return new ResponseEntity<>(pack, HttpStatus.OK);
 				}
 				
      @GetMapping("/getpackagesCreatedById")
- 	public List<Package> getAllPackagesCreatedyMerchant(@PathVariable Integer merchantId) throws MerchantNotFoundException{
+ 	public List<IPackage> getAllPackagesCreatedyMerchant(@PathVariable Integer merchantId) throws MerchantNotFoundException{
  		return pService.getAllPackagesCreatedyMerchant(merchantId);
 				
      }
      
      @GetMapping("/getpackagesByEmail/{merchantEmail}")
-     public List<Package> getAllPackagesCreatedyMerchantbyEmail(@PathVariable String merchantEmail)throws MerchantNotFoundException{
+     public List<IPackage> getAllPackagesCreatedyMerchantbyEmail( @PathVariable String merchantEmail)throws MerchantNotFoundException{
 		return pService.getAllPackagesCreatedyMerchantbyEmail(merchantEmail);
 	}
      
      @GetMapping("/getAllPackages")
- 	public List<Package> getAllPackages() {
+ 	public List<IPackage> getAllPackages() {
  		return pService.getAllPackages();
 	
      }
      
      @PutMapping("/updatepackage") 
- 	public ResponseEntity<Package> updatePackage(@RequestBody Package tripPackage) {
+ 	public ResponseEntity<IPackage> updatePackage(@Valid@RequestBody IPackage tripPackage) {
  		return new ResponseEntity<>(pService.updatePackage(tripPackage), HttpStatus.OK);
  	}
 	

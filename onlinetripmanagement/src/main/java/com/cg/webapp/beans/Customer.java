@@ -44,7 +44,7 @@ public class Customer {
 	private String mobileNo;
 	
 	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "customer")
-	private List<Package> packages= new ArrayList<Package>();
+	private List<IPackage> packages= new ArrayList<IPackage>();
 	
 	
 	

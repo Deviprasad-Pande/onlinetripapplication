@@ -43,14 +43,14 @@ public class Merchant {
 	private String mobileNo;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "merchant")
-	private List<Package> packages=new ArrayList<Package>();
+	private List<IPackage> packages=new ArrayList<IPackage>();
 
 	public Integer getMerchantId() {
 		// TODO Auto-generated method stub
 		return merchantId ;
 	}
 
-	public List<Package> getPackages() {
+	public List<IPackage> getPackages() {
 		// TODO Auto-generated method stub
 		return getPackages();
 	}

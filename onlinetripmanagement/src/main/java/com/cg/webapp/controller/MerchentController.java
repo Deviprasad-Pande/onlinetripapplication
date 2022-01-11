@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.webapp.beans.LoginBean;
 import com.cg.webapp.beans.Merchant;
-import com.cg.webapp.beans.Package;
+import com.cg.webapp.beans.IPackage;
 import com.cg.webapp.exception.MerchantNotFoundException;
 import com.cg.webapp.exception.PackageNotFoundException;
 import com.cg.webapp.service.MerchantService;
@@ -28,10 +28,6 @@ public class MerchentController {
 
 	@Autowired
 	private MerchantService mService;
-	
-	@Autowired
-	private PackageService pService;
-	
 	
 	@PostMapping("/registerMerchant")
 	public ResponseEntity<Merchant> registerMerchantHandler(@Valid @RequestBody Merchant merchant){
@@ -46,7 +42,7 @@ public class MerchentController {
 	
 	
 	@PostMapping("/loginMerchant")
-	public ResponseEntity<Merchant> loginMerchantHandler(@RequestBody LoginBean loginBean){
+	public ResponseEntity<Merchant> loginMerchantHandler(@Valid@RequestBody LoginBean loginBean){
 		
 		if(loginBean.getRole().equals("merchant")) {
 			
@@ -64,7 +60,7 @@ public class MerchentController {
 	}
 
 	@GetMapping("/viewMerchantByUsername/{email}")
-    public ResponseEntity<Merchant>  viewMerchantByUsername(@PathVariable String email)throws MerchantNotFoundException{
+    public ResponseEntity<Merchant>  viewMerchantByUsername( @PathVariable String email)throws MerchantNotFoundException{
 		Merchant viewMerchant =mService. viewMerchantByUsername(email);
 	 return new ResponseEntity<Merchant>(viewMerchant,HttpStatus.OK);
 	
@@ -72,7 +68,7 @@ public class MerchentController {
 
 	
 	@PutMapping("/updateMerchant") 
- 	public ResponseEntity<Merchant> updateMerchant(@RequestBody Merchant merchant)throws MerchantNotFoundException {
+ 	public ResponseEntity<Merchant> updateMerchant(@Valid@RequestBody Merchant merchant)throws MerchantNotFoundException {
  		return new ResponseEntity<Merchant>(mService.updateMerchant(merchant), HttpStatus.OK);
 	}
 

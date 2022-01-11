@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.webapp.beans.Customer;
+import com.cg.webapp.beans.IPackage;
 import com.cg.webapp.exception.CustomerNotFoundException;
 import com.cg.webapp.exception.PackageNotAvailableException;
 import com.cg.webapp.exception.PackageNotFoundException;
@@ -19,10 +20,6 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private CustomerRepository cRepo;
 	
-	@Autowired
-	private PackageRepository pRepo;
-	
-
 	@Override
 	public Customer registerNewCustomer(Customer customer) {
 		
@@ -49,28 +46,30 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer updateCustomer(Customer customer) throws CustomerNotFoundException {
-            cRepo.findById(customer.getCustomerId()).orElseThrow(() -> new CustomerNotFoundException("No cusotmer with id: " + customer.getCustomerId() + " found!!"));
-            return cRepo.save(customer);
+         cRepo.findBy(customer).orElseThrow(() -> new CustomerNotFoundException("No cusotmer with id: " + customer+ " found!!"));	
+		   cRepo.save(customer);
+		return customer;
 	}
 
 	@Override
 	public List<Customer> getAllRegistedCustomers() {
-		
-		
 		return cRepo.findAll();
 	}
 
 	@Override
-	public List<Package> getAllPackagesByCustomer(Integer customerId) throws CustomerNotFoundException {
-		// TODO Auto-generated method stub
-		pRepo.findById(customerId).orElseThrow(() -> new CustomerNotFoundException("No cusotmer with id: " + customerId() + " found!!"));
-       return Package;
+	public List<IPackage> getAllPackagesByCustomer(Integer customerId) throws CustomerNotFoundException {
+		List<IPackage> packages = cRepo.findAllById(customerId);
+		if (packages == null)
+			throw new CustomerNotFoundException("No cusotmer with Name: " + customerId + " found!!");
+		return packages;
+		
 	}
 
 	@Override
-	public Customer bookAPackage(Package tripPackage) throws PackageNotAvailableException {
+	public Customer bookAPackage(IPackage tripPackage) throws PackageNotAvailableException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
 }
