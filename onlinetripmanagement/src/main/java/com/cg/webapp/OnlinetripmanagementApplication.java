@@ -14,5 +14,5 @@ public class OnlinetripmanagementApplication {
 		SpringApplication.run(OnlinetripmanagementApplication.class, args);
 	    log.info("Application Configured.....");
 	}
-
+	
 }
