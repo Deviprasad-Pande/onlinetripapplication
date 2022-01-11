@@ -9,12 +9,13 @@ import com.cg.webapp.beans.Customer;
 import com.cg.webapp.beans.IPackage;
 import com.cg.webapp.exception.CustomerNotFoundException;
 import com.cg.webapp.exception.PackageNotAvailableException;
-import com.cg.webapp.exception.PackageNotFoundException;
 import com.cg.webapp.repositories.CustomerRepository;
-import com.cg.webapp.repositories.MerchantRepository;
-import com.cg.webapp.repositories.PackageRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
 
 @Service
+@Slf4j
 public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
@@ -22,7 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public Customer registerNewCustomer(Customer customer) {
-		
+	
 	 return cRepo.save(customer);
 	}
 
@@ -58,9 +59,10 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<IPackage> getAllPackagesByCustomer(Integer customerId) throws CustomerNotFoundException {
-		List<IPackage> packages = cRepo.findAllById(customerId);
-		if (packages == null)
+		List<IPackage> packages= cRepo.findAllById(customerId);
+		if (packages == null) {
 			throw new CustomerNotFoundException("No cusotmer with Name: " + customerId + " found!!");
+		}
 		return packages;
 		
 	}
