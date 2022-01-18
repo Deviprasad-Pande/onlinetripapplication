@@ -78,11 +78,8 @@ public class CustomerServiceImpl implements CustomerService {
 		
 	}
 
-	@Override
-	public Customer bookAPackage(IPackage tripPackage) throws PackageNotAvailableException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	  
+	
 
 	
 }

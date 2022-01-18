@@ -1,10 +1,12 @@
 package com.cg.webapp.service;
 
 import java.util.List;
+
+import org.springframework.web.bind.annotation.PathVariable;
+
 import com.cg.webapp.beans.IPackage;
 import com.cg.webapp.beans.Customer;
 import com.cg.webapp.exception.CustomerNotFoundException;
-import com.cg.webapp.exception.PackageNotAvailableException;
 
 public interface CustomerService {
 	
@@ -20,9 +22,13 @@ public interface CustomerService {
 	
 	public List<IPackage> getAllPackagesByCustomer(Integer customerId)throws CustomerNotFoundException;
 	
-	public Customer bookAPackage(IPackage tripPackage)throws PackageNotAvailableException;
+
+		
 	
 	
+	
+
+
 	
 	
 	

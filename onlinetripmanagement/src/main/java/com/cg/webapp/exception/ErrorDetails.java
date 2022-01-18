@@ -1,46 +1,16 @@
 package com.cg.webapp.exception;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-/**
- * This class is used for printing the error message along with error details
- * and time at which error occurred
- */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ErrorDetails {
-	private Date timestamp;
+	private LocalDateTime timestamp;
 	private String message;
 	private String details;
-
-	// parameterized constructor
-	public ErrorDetails(Date timestamp, String message, String details) {
-		this.timestamp = timestamp;
-		this.message = message;
-		this.details = details;
-	}
-
-	// getters setters
-	public Date getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public String getDetails() {
-		return details;
-	}
-
-	public void setDetails(String details) {
-		this.details = details;
-	}
 
 }

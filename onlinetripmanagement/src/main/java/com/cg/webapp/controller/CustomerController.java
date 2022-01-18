@@ -1,5 +1,6 @@
 package com.cg.webapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -19,13 +20,17 @@ import com.cg.webapp.beans.LoginBean;
 import com.cg.webapp.beans.IPackage;
 import com.cg.webapp.exception.CustomerNotFoundException;
 import com.cg.webapp.exception.MerchantNotFoundException;
+import com.cg.webapp.exception.PackageNotAvailableException;
 import com.cg.webapp.service.CustomerService;
+import com.cg.webapp.service.PackageService;
 
 @RestController
 public class CustomerController {
 
 	@Autowired
 	private CustomerService cService;
+	@Autowired
+	private PackageService pService;
 	
 	@PostMapping("/registerCustomer")
 	public ResponseEntity<Customer> registerNewCustomer(@Valid@RequestBody Customer customer) {
@@ -68,12 +73,39 @@ public class CustomerController {
 		}
 	
 		@GetMapping("/getcustomerbyid/{customerId}")
-		public List<IPackage> getAllPackagesByCustomer(@PathVariable Integer customerId) throws CustomerNotFoundException{
+		public List<IPackage> getAllPackagesByCustomer(@PathVariable Integer customerId) {
 	 		return cService.getAllPackagesByCustomer(customerId);
 		}
 	
 		
-		
+		@PostMapping("/bookPackage/{customerId}/{packageId}")
+		public String bookPackage(@PathVariable Integer customerId, @PathVariable Integer packageId ) {
+			
+			IPackage ipackage   = pService.getPackageDetailsById(packageId);
+			Customer customer = cService.getCustomerDetailsById(customerId);
+			
+			if(ipackage.getAvailability()> 0 && customer != null){
+				
+				ipackage.setAvailability(ipackage.getAvailability()-1);
+				
+				List<IPackage> packagelist = new ArrayList<>();		
+				packagelist.add(ipackage);
+				
+				List<Customer> customers = new ArrayList<>();	
+				customers.add(customer);
+				
+				ipackage.setCustomer(customers);
+				customer.setPackages(packagelist);
+				
+		        cService.updateCustomer(customer);
+		        IPackage resPackage =  pService.updatePackage(ipackage);
+		       
+		     
+		        return "Packages available to book = " + resPackage.getAvailability().toString();
+			}
+			
+			 return "Sorry No Packages Available To Book";
+		}
 	
 	
 	

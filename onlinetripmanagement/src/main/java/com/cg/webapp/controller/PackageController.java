@@ -47,19 +47,19 @@ public class PackageController {
 		 
 		 
      @GetMapping("/getpackageDetailsById/{packageId}")
-			public ResponseEntity<IPackage> getPackageDetailsById(@PathVariable Integer packageId) throws PackageNotFoundException {
+			public ResponseEntity<IPackage> getPackageDetailsById(@PathVariable Integer packageId)  {
 				IPackage pack = pService.getPackageDetailsById(packageId);
 				return new ResponseEntity<>(pack, HttpStatus.OK);
 				}
 				
      @GetMapping("/getpackagesCreatedById")
- 	public List<IPackage> getAllPackagesCreatedyMerchant(@PathVariable Integer merchantId) throws MerchantNotFoundException{
+ 	public List<IPackage> getAllPackagesCreatedyMerchant(@PathVariable Integer merchantId) {
  		return pService.getAllPackagesCreatedyMerchant(merchantId);
 				
      }
      
      @GetMapping("/getpackagesByEmail/{merchantEmail}")
-     public List<IPackage> getAllPackagesCreatedyMerchantbyEmail( @PathVariable String merchantEmail)throws MerchantNotFoundException{
+     public List<IPackage> getAllPackagesCreatedyMerchantbyEmail( @PathVariable String merchantEmail){
 		return pService.getAllPackagesCreatedyMerchantbyEmail(merchantEmail);
 	}
      

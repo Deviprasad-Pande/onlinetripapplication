@@ -16,6 +16,7 @@ public class IAdmin {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	private Integer adminId;
 	
 	private String name="John";
