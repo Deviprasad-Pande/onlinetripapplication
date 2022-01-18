@@ -1,6 +1,6 @@
 package com.cg.webapp.exception;
 
-import lombok.NoArgsConstructor;
+
 
 public class PackageNotFoundException extends RuntimeException {
 

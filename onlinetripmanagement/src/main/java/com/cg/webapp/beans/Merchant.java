@@ -10,10 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
+<<<<<<< HEAD
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+=======
+>>>>>>> branch 'master' of https://github.com/Deviprasad-Pande/onlinetripapplication.git
 import javax.validation.constraints.Size;
 
+
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
